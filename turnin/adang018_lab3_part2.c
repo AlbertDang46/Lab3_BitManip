@@ -36,6 +36,7 @@ int main(void) {
             case  3: fuelLevel = (fuelLevel & 0xEF) | 0x10;
             case  2:
             case  1: fuelLevel = (fuelLevel & 0xDF) | 0x20;
+                     break;
             case  0: fuelLevel = 0x00;
        }
 

@@ -16,9 +16,21 @@ int main(void) {
     DDRA = 0x00; PORTA = 0x00;
     DDRC = 0xFF; PORTC = 0x00;
 
-    unsigned char fuelLevel = 0x00;
+    unsigned char inIgnition = 0x00;
+    unsigned char driverSeated = 0x00;
+    unsigned char sbFastened = 0x00;
+    unsigned char sbIconOn = 0x00;
+    unsigned char fuelLevel = 0x00;   
 
     while (1) {
+        inIgnition = (PINA & 0x10);
+        driverSeated = (PINA & 0x20);
+        sbFastened = (PINA & 0x40);
+        sbIconOn = inIgnition | driverSeated | sbFastened;
+        if(sbIconOn == 0x30) {
+            PORTC = (PORTC | 0x80);
+        }
+
         fuelLevel = 0x00;
         switch(PINA) {
             case 15:
@@ -36,6 +48,7 @@ int main(void) {
             case  3: fuelLevel = (fuelLevel & 0xEF) | 0x10;
             case  2:
             case  1: fuelLevel = (fuelLevel & 0xDF) | 0x20;
+                     break;
             case  0: fuelLevel = 0x00;
        }
 

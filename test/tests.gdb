@@ -39,7 +39,7 @@ expectPORTC 0
 checkResult
 
 # Add tests below
-test "PINA: 0x00 => PORTC: 0x00"
+test "PINA: 0x00 => PORTC: 0x40"
 setPINA 0x00
 continue 5
 expectPORTC 0x00
